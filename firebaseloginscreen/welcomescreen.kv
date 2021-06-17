@@ -1,0 +1,87 @@
+<WelcomeScreen>:
+    RelativeLayout:
+        MDScreen:
+
+            MDCard:
+                border_radius: 20
+                radius: [15]
+                size_hint : 0.9,0.7
+
+                pos_hint : {"center_x":.5,"center_y":.5}
+
+
+
+                padding : 20
+                spacing : 30
+                orientation : "vertical"
+                MDLabel :
+                    text : 'MAIN-PAGE'
+                    font_style : 'Button'
+                    font_size:50
+                    halign:'center'
+                    size_hint_x : 0.5
+                    pos_hint:{'center_x':0.5}
+                Widget :
+                    size_hint_y : None
+                    height : 30
+                Widget :
+                    size_hint_y : None
+                    height : 15
+
+
+                MDBoxLayout:
+                    orientation:'vertical'
+                    MDRaisedButton:
+                        id: log_in_button
+                        size_hint_x: 0.7
+
+
+
+
+
+
+
+                        pos_hint: {"center_x":0.5}
+                        text: "SIGN-IN"
+
+                        on_release:
+                            root.parent.current = "sign_in_screen"
+                            root.parent.parent.restart()
+
+                    Widget
+                        size_hint_y : None
+                        height : 30
+
+                    Widget :
+                        size_hint_y : None
+                        height : 60
+                    MDRaisedButton:
+                        id: create_account_button
+                        size_hint : 0.7,None
+                        pos_hint:{"center_x":0.5}
+                        text: "SIGN-UP "
+                        on_release:
+                            root.parent.current = "sign_up_screen"
+                            root.parent.parent.restart()
+                Widget :
+                    size_hint_y : None
+                    height : 30
+
+
+
+
+
+
+                Widget :
+                    size_hint_y : None
+                    height : 90
+                Widget
+                    size_hint_y : None
+                    height : 30
+                Widget :
+                    size_hint_y : None
+                    height : 30
+                Widget :
+                    size_hint_y : None
+                    height : 30
+

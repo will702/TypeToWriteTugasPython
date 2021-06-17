@@ -1,0 +1,183 @@
+<SignInScreen>:
+
+    #:import hex kivy.utils.get_color_from_hex
+
+
+    RelativeLayout:
+
+        MDScreen :
+
+            MDCard:
+                border_radius: 20
+                radius: [15]
+                size_hint : 0.9,0.7
+
+                pos_hint : {"center_x":.5,"center_y":.5}
+
+
+                padding : 20
+                spacing : 30
+                orientation : "vertical"
+                MDCard:
+                    elevation:0
+                    MDLabel :
+
+                        text : 'SIGN-IN'
+
+                        font_style:'Button'
+                        font_size:50
+                        halign:'center'
+                        size_hint_x : 0.5
+                        pos_hint:{'center_x':0.5}
+
+
+                        size_hint_x:0.2
+                        pos_hint: {"center_x": .5, "top": .8}
+                        height : self.texture_size[1]
+                        padding_y : 15
+
+                Widget :
+                    size_hint_y : None
+                    height : 30
+
+
+                Widget :
+                    size_hint_y : None
+                    height : 30
+                Widget :
+                    size_hint_y : None
+                    height : 10
+                MDBoxLayout:
+                    orientation:"vertical"
+                    MDTextField:
+                        id: email
+                        size_hint_x : 0.8
+                        icon_right:'gmail'
+
+                        pos_hint: {"center_x": .5, "top": .6}
+                        font_size : 35
+                        hint_text:'Email'
+                        required:True
+
+
+
+                    Widget :
+                        size_hint_y : None
+                        height : 30
+
+
+
+
+
+                    Widget :
+                        size_hint_y : None
+                        height : 10
+                    MDTextField:
+                        id: password
+                        size_hint_x : 0.8
+                        password:True
+                        icon_right:'eye-off'
+
+                        pos_hint: {"center_x": .5, "top": .6}
+                        font_size : 35
+                        required:True
+
+                        hint_text:'Password'
+                Widget :
+                    size_hint_y : None
+                    height : 30
+                Widget :
+                    size_hint_y : None
+                    height : 30
+                Widget :
+                    size_hint_y : None
+                    height : 30
+
+
+
+                Widget :
+                    size_hint_y : None
+                    height : 30
+
+
+
+                MDBoxLayout:
+                    orientation:'vertical'
+                    MDRaisedButton:
+
+                        text: "SIGN-IN"
+
+                        pos_hint: {"center_x": .5, "top": .45}
+                        size_hint:None,None
+                        on_release:
+                            # Need to refer to the FirebaseLoginScreen
+                            root.parent.parent.sign_in(email.text, password.text)
+                            sign_in_button.opacity = 0
+                            sign_in_button.disabled = True
+                            root.parent.parent.display_loading_screen()
+                    Widget :
+                        size_hint_y : None
+                        height : 30
+
+
+
+                    MDFlatButton:
+                        text: "You Forgot Your Password. [color=#038c42]Reset Now[/color]"
+                        markup:True
+                        size_hint: None,None
+                        width:700
+                        pos_hint: {"center_x": .5, "top": .45}
+                        on_release:
+                            # Need to refer to the FirebaseLoginScreen
+                            root.parent.parent.reset_password(email.text)
+                            sign_in_button.opacity = 0
+                            sign_in_button.disabled = True
+                            root.parent.parent.display_loading_screen()
+
+                    MDFlatButton:
+                        id:sign_in_button
+                        text: "You Forgot To Sign Up. [color=#038c42]Sign Now[/color]"
+                        markup:True
+                        size_hint: None,None
+
+                        pos_hint: {"center_x": .5, "center_y": .05}
+                        opacity: 0
+                        disabled: True
+                        on_release:
+                            root.parent.current = "sign_up_screen"
+                            root.parent.parent.ids.sign_up_screen.ids.email.text = email.text
+                            root.parent.parent.ids.sign_up_screen.ids.password.text = password.text
+                    Widget :
+                        size_hint_y : None
+                        height : 30
+                    Widget :
+                        size_hint_y : None
+                        height : 30
+                    Widget :
+                        size_hint_y : None
+                        height : 30
+                    Widget :
+                        size_hint_y : None
+                        height : 30
+
+
+
+
+
+        MDToolbar:
+            md_bg_color: 0,0,0,0
+
+            elevation: 0
+            pos_hint: {"top": 1}
+            left_action_items: [['chevron-left', lambda x: root.go_back()]]
+
+            specific_text_color:hex('#fc9d30')
+        MDSwitch:
+
+            pos_hint:{'center_x':.9,'center_y':.1}
+            on_active:root.parent.parent.show_password()
+            thumb_color:73/255,72/255,73/255,1
+
+
+
+

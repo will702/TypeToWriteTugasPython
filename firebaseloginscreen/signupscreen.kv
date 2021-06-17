@@ -1,0 +1,133 @@
+<SignUpScreen>:
+
+    #:import hex kivy.utils.get_color_from_hex
+    RelativeLayout:
+
+
+        MDScreen :
+
+
+            MDCard:
+                border_radius: 20
+                radius: [15]
+                size_hint : 0.9,0.7
+
+                pos_hint : {"center_x":.5,"center_y":.5}
+
+                padding : 20
+                spacing : 30
+                orientation : "vertical"
+
+                MDCard:
+
+                    elevation:0
+                    pos_hint:{'center_y':0.5,'center_x':0.5}
+
+                    MDLabel :
+
+                        text : 'SIGN-UP'
+                        font_style:'Button'
+                        font_size:50
+
+                        halign:'center'
+                        size_hint_x : 0.5
+                        pos_hint:{'center_x':0.5}
+
+
+                        size_hint_x:0.2
+                        pos_hint: {"center_x": .5, "top": .8}
+                        height : self.texture_size[1]
+                        padding_y : 15
+
+                Widget :
+                    size_hint_y : None
+                    height : 30
+
+                Widget :
+                    size_hint_y : None
+                    height : 30
+                MDBoxLayout:
+                    orientation:"vertical"
+                    MDTextField:
+                        id: email
+                        size_hint_x : 0.8
+                        icon_right:'gmail'
+
+                        pos_hint: {"center_x": .5, "top": .6}
+                        font_size : 35
+                        hint_text:'Email'
+                        required:True
+
+                    Widget :
+                        size_hint_y : None
+                        height : 30
+
+
+                    Widget :
+                        size_hint_y : None
+                        height : 10
+
+                    MDTextField:
+                        id: password
+                        size_hint_x : 0.8
+
+                        icon_right:'eye-off'
+                        width : 550
+                        pos_hint: {"center_x": .5, "top": .6}
+                        font_size : 35
+                        required:True
+
+                        hint_text:'Password'
+
+                Widget :
+                    size_hint_y : None
+                    height : 30
+
+                MDRaisedButton:
+                    text: "SIGN-UP"
+
+                    size_hint: .4 ,None
+                    width : 600
+                    pos_hint: {"center_x": .5, "top": .15}
+                    size_hint:None,None
+                    on_release:
+                        # Need to refer to the FirebaseLoginScreen
+                        root.parent.parent.sign_up(email.text, password.text)
+                        sign_in_button.opacity = 0
+                        sign_in_button.disabled = True
+                        root.parent.parent.display_loading_screen()
+                        root.parent.parent.ids.sign_in_screen.ids.email.text = email.text
+                        root.parent.parent.ids.sign_in_screen.ids.password.text = password.text
+
+                MDFlatButton:
+                    id: sign_in_button
+                    text: "You've already signed in,[color=#038c42]press this[/color]"
+                    markup:True
+                    size_hint: None,None
+                    pos_hint: {"center_x": .5, "center_y": .25}
+                    opacity: 0
+
+                    disabled: True
+                    on_release:
+                        root.parent.current = "sign_in_screen"
+                        root.parent.parent.ids.sign_in_screen.ids.email.text = email.text
+                        root.parent.parent.ids.sign_in_screen.ids.password.text = password.text
+                Widget :
+                    size_hint_y : None
+                    height : 30
+
+
+                Widget :
+                    size_hint_y : None
+                    height : 30
+                Widget :
+                    size_hint_y : None
+                    height : 30
+        MDToolbar:
+            md_bg_color:0,0,0,0
+            elevation: 0
+
+            pos_hint: {"top": 1}
+            left_action_items: [['chevron-left', lambda x: root.go_back()]]
+            specific_text_color:hex("#fc9d30")
+

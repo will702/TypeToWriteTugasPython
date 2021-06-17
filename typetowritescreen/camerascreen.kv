@@ -1,0 +1,54 @@
+
+#:import XCamera kivy_garden.xcamera.XCamera
+<CameraScreen>:
+
+
+
+
+
+
+
+    MDCard:
+        elevation:0
+        size_hint:1,0.8
+        pos_hint:{"center_x":0.4,'center_y':0.5}
+
+        XCamera:
+
+            id: xcamera
+
+            on_picture_taken:
+
+                app.picture_chosen(*args)
+
+            size_hint:1,1
+            canvas.before:
+                PushMatrix:
+                Rotate:
+                    angle: -90
+                    axis: 0,0,1
+                    origin: root.width/2, root.height/2
+            canvas.after:
+                PopMatrix:
+
+    MDIconButton:
+        icon:'img/camera_icon.png'
+        size_hint:0.2,0.14
+        on_press:
+
+            root.parent.parent.shoot()
+        pos_hint: {'center_x': 0.5,'center_y':0.25}
+    MDIconButton:
+
+        icon: 'arrow-left'
+        on_release:
+            root.parent.parent.change_screen('screen1')
+
+
+        pos_hint: {'center_x': 0.1,'center_y':0.05}
+
+
+
+
+
+

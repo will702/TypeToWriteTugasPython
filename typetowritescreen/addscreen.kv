@@ -1,0 +1,119 @@
+#:import rgba kivy.utils.get_color_from_hex
+
+<BackgroundLayer@BoxLayout>:
+    orientation:'vertical'
+    BoxLayout:
+        orientation:'vertical'
+        canvas.before:
+            Color:
+                rgba:utils.get_color_from_hex("#289fbd")
+            RoundedRectangle:
+                pos:self.pos
+                size:self.size
+                radius:[0,0,40,40]
+    BoxLayout:
+        orientation:'horizontal'
+
+<AddScreen>:
+    on_enter:
+        app.animate_card(card,no_resi,kurir)
+    on_leave:
+        app.reset_card(card,no_resi,kurir)
+    background:"img/courier.jpg"
+    canvas.before:
+
+        Rectangle:
+            size:900,800
+            pos: 10,5
+            source:root.background
+
+    BackgroundLayer:
+    MDToolbar:
+
+        md_bg_color:0,0,0,0
+        elevation:0
+        pos_hint: {"top": 0.95}
+
+
+        left_action_items: [['chevron-left', lambda x: root.go_back()]]
+
+        specific_text_color: hex('#000000')
+
+
+
+    MDCard:
+
+        id:card
+        orientation:'vertical'
+        border_radius: 20
+        radius: [15]
+        opacity:0.8
+        size_hint : 0.9,0.7
+
+        pos_hint : {"center_x":.5,"center_y":.0}
+
+
+
+
+    MDTextField:
+        id: no_resi
+        hint_text: "NO-RESI"
+        icon_right: "receipt"
+
+
+        width:500
+        height:50
+
+        pos_hint: {"center_x":.0, "center_y": .75}
+        size_hint:None,None
+
+
+
+    Spinner:
+
+        id: kurir
+        width:500
+        height:50
+        size_hint_x:None
+        size_hint_y:None
+        pos_hint:{'center_x': 0.5,'center_y':1.0}
+        text:"KURIR"
+        on_text:root.parent.parent.change_image_resi(kurir.text)
+        values:["JNE", "JNT", "POS", "LION", "NINJA", "SICEPAT", "TIKI", "ANTERAJA", "WAHANA"]
+
+
+    MDCard:
+        pos_hint:{'center_x':0.5,'center_y':0.5}
+        size_hint:0.4,0.1
+        elevation:2
+
+        Image:
+
+            id:image
+            ii:''
+            source:self.ii
+
+
+
+
+    MDFloatingActionButtonSpeedDial:
+        callback:app.call
+
+        data:
+            {'content-save':"Check Resi",
+
+            "view-list":"Receipt List",
+
+
+            }
+        hint_animation: True
+        bg_hint_color: rgba("#ffb005")
+        root_button_anim: True
+        pos_hint:{'center_x':0.5,'center_y':0.2}
+
+
+
+
+
+
+

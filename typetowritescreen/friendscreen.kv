@@ -1,0 +1,52 @@
+
+<FriendScreen>:
+
+#:import Window kivy.core.window.Window
+#:import hex kivy.utils.get_color_from_hex
+
+
+
+
+    MDToolbar:
+        elevation:0
+        title: "Couriers"
+        size_hint_x:1
+        size_hint_y:0.05
+
+
+
+        pos_hint: {'top': 1}
+    MDIconButton:
+        id:iconbutton
+        icon:'dots-vertical'
+        pos_hint:{'center_x':.95,'center_y':0.975}
+        on_release:root.parent.parent.open_spinner()
+    BoxLayout:
+
+        orientation:'vertical'
+
+
+        Widget :
+            size_hint_y : None
+            height : 30
+        Widget :
+            size_hint_y : None
+            height : 30
+
+        ScrollView:
+
+            do_scroll_x: False
+            height: Window.height
+            MDList:
+                id: container
+
+
+    MDIconButton:
+
+        icon: 'arrow-left'
+        on_release:
+            root.go_back()
+
+        pos_hint:{'center_x':0.9,'center_y':0.05}
+
+
